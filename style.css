@@ -1,0 +1,20 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#top-bar {   
+     height: 25%;
+    width: 100%;
+    background: rgb(255, 224, 229);
+    float: left;
+   }
+#footer {   
+   clear:both;
+    height: 25;
+   width: 100%;
+   background: rgb(255, 225, 231);
+   float: left;
+   text-align: center;
+  }

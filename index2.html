@@ -1,0 +1,322 @@
+<html>
+	<head>
+		<title>duvody</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=ISO 8859-2">
+		<meta name="author" content="Vaia">
+		<meta name="description" content="Přání pro Braníčka.">
+	<style>
+
+	*{
+		margin: 5;
+		padding: 10;
+		box-sizing: border-box;
+	}
+	body{
+		width:100%;
+		height: 100 vh;
+		display: flex;
+		justify-content:center;
+		align-items: center;
+		flex-direction: column;
+		background-color: beige;
+	}
+	body {
+	font-family: georgia,garamond,serif;
+	}
+	</style>
+	</head>
+	<body bgcolor="pink">
+		<h1>Důvody proč tě miluji</h1><br>
+		<a href="index.html">Zpět</a>
+
+		<!--############## ZDE ZAČÍNÁ SRDCE ##############-->
+		<script>
+			// <![CDATA[
+			var colours=new Array('#f00', '#f06', '#f0f', '#f6f', '#f39', '#f9c'); // colours of the hearts
+			var minisize=10; // smallest size of hearts in pixels
+			var maxisize=20; // biggest size of hearts in pixels
+			var hearts=100; // maximum number of hearts on screen
+			var over_or_under="over"; // set to "over" for hearts to always be on top, or "under" to allow them to float behind other objects
+			
+			/*****************************
+			*JavaScript Love Heart Cursor*
+			*  (c)2013+ mf2fm web-design *
+			*   http://www.mf2fm.com/rv  *
+			*  DON'T EDIT BELOW THIS BOX *
+			*****************************/
+			var x=ox=400;
+			var y=oy=300;
+			var swide=800;
+			var shigh=600;
+			var sleft=sdown=0;
+			var herz=new Array();
+			var herzx=new Array();
+			var herzy=new Array();
+			var herzs=new Array();
+			var kiss=false;
+			
+			if (typeof('addRVLoadEvent')!='function') function addRVLoadEvent(funky) {
+			  var oldonload=window.onload;
+			  if (typeof(oldonload)!='function') window.onload=funky;
+			  else window.onload=function() {
+				if (oldonload) oldonload();
+				funky();
+			  }
+			}
+			
+			addRVLoadEvent(mwah);
+			
+			function mwah() { if (document.getElementById) {
+			  var i, heart;
+			  for (i=0; i<hearts; i++) {
+				heart=createDiv("auto", "auto");
+				heart.style.visibility="hidden";
+				heart.style.zIndex=(over_or_under=="over")?"1001":"0";
+				heart.style.color=colours[i%colours.length];
+				heart.style.pointerEvents="none";
+				if (navigator.appName=="Microsoft Internet Explorer") heart.style.filter="alpha(opacity=75)";
+				else heart.style.opacity=0.45;
+				heart.appendChild(document.createTextNode(String.fromCharCode(9829)));
+				document.body.appendChild(heart);
+				herz[i]=heart;
+				herzy[i]=false;
+			  }
+			  set_scroll();
+			  set_width();
+			  herzle();
+			}}
+			
+			function herzle() {
+			  var c;
+			  if (Math.abs(x-ox)>1 || Math.abs(y-oy)>1) {
+				ox=x;
+				oy=y;
+				for (c=0; c<hearts; c++) if (herzy[c]===false) {
+				  herz[c].firstChild.nodeValue=String.fromCharCode(9829);
+				  herz[c].style.left=(herzx[c]=x-minisize/2)+"px";
+				  herz[c].style.top=(herzy[c]=y-minisize)+"px";
+				  herz[c].style.fontSize=minisize+"px";
+				  herz[c].style.fontWeight='normal';
+				  herz[c].style.visibility='visible';
+				  herzs[c]=minisize;
+				  break;
+				}
+			  }
+			  for (c=0; c<hearts; c++) if (herzy[c]!==false) blow_me_a_kiss(c);
+			  setTimeout("herzle()", 30);
+			}
+			
+			document.onmousedown=pucker;
+			document.onmouseup=function(){clearTimeout(kiss);};
+			
+			function pucker() {
+			  ox=-1;
+			  oy=-1;
+			  kiss=setTimeout('pucker()', 100);
+			}
+			
+			function blow_me_a_kiss(i) {
+			  herzy[i]-=herzs[i]/minisize+i%2;
+			  herzx[i]+=(i%5-2)/5;
+			  if (herzy[i]<sdown-herzs[i] || herzx[i]<sleft-herzs[i] || herzx[i]>sleft+swide-herzs[i]) {
+				herz[i].style.visibility="hidden";
+				herzy[i]=false;
+			  }
+			  else if (herzs[i]>minisize+1 && Math.random()<2.5/hearts) break_my_heart(i);
+			  else {
+				if (Math.random()<maxisize/herzy[i] && herzs[i]<maxisize) herz[i].style.fontSize=(++herzs[i])+"px";
+				herz[i].style.top=herzy[i]+"px";
+				herz[i].style.left=herzx[i]+"px";
+			  }
+			}
+			
+			function break_my_heart(i) {
+			  var t;
+			  herz[i].firstChild.nodeValue=String.fromCharCode(9676);
+			  herz[i].style.fontWeight='bold';
+				herzy[i]=false;
+			  for (t=herzs[i]; t<=maxisize; t++) setTimeout('herz['+i+'].style.fontSize="'+t+'px"', 60*(t-herzs[i]));
+			  setTimeout('herz['+i+'].style.visibility="hidden";', 60*(t-herzs[i]));
+			}
+			
+			document.onmousemove=mouse;
+			function mouse(e) {
+			  if (e) {
+				y=e.pageY;
+				x=e.pageX;
+			  }
+			  else {
+				set_scroll();
+				y=event.y+sdown;
+				x=event.x+sleft;
+			  }
+			}
+			
+			window.onresize=set_width;
+			function set_width() {
+			  var sw_min=999999;
+			  var sh_min=999999;
+			  if (document.documentElement && document.documentElement.clientWidth) {
+				if (document.documentElement.clientWidth>0) sw_min=document.documentElement.clientWidth;
+				if (document.documentElement.clientHeight>0) sh_min=document.documentElement.clientHeight;
+			  }
+			  if (typeof(self.innerWidth)=='number' && self.innerWidth) {
+				if (self.innerWidth>0 && self.innerWidth<sw_min) sw_min=self.innerWidth;
+				if (self.innerHeight>0 && self.innerHeight<sh_min) sh_min=self.innerHeight;
+			  }
+			  if (document.body.clientWidth) {
+				if (document.body.clientWidth>0 && document.body.clientWidth<sw_min) sw_min=document.body.clientWidth;
+				if (document.body.clientHeight>0 && document.body.clientHeight<sh_min) sh_min=document.body.clientHeight;
+			  }
+			  if (sw_min==999999 || sh_min==999999) {
+				sw_min=800;
+				sh_min=600;
+			  }
+			  swide=sw_min;
+			  shigh=sh_min;
+			}
+			
+			window.onscroll=set_scroll;
+			function set_scroll() {
+			  if (typeof(self.pageYOffset)=='number') {
+				sdown=self.pageYOffset;
+				sleft=self.pageXOffset;
+			  }
+			  else if (document.body && (document.body.scrollTop || document.body.scrollLeft)) {
+				sdown=document.body.scrollTop;
+				sleft=document.body.scrollLeft;
+			  }
+			  else if (document.documentElement && (document.documentElement.scrollTop || document.documentElement.scrollLeft)) {
+				sleft=document.documentElement.scrollLeft;
+				sdown=document.documentElement.scrollTop;
+			  }
+			  else {
+				sdown=0;
+				sleft=0;
+			  }
+			}
+			
+			function createDiv(height, width) {
+			  var div=document.createElement("div");
+			  div.style.position="absolute";
+			  div.style.height=height;
+			  div.style.width=width;
+			  div.style.overflow="hidden";
+			  div.style.backgroundColor="transparent";
+			  return (div);
+			}
+			// ]]>
+			</script>
+			<!--############## ZDE KONČÍ SRDCE ##############-->
+<ul>
+<li>Umíš mě rozesmát (ano, těmi samými blbými vtipy)</li>
+<li>Všechno se s tebou zdá být jednodušší</li>
+<li>Nestresuješ</li>
+<li>Motivuješ mě</li>
+<li>Máš sny a to mě inspiruje</li>
+<li>Máš krásné oči</li>
+<li>Jsi cílevědomý</li>
+<li>Umíš to s dětmi</li>
+<li>Jsi trpělivý</li>
+<li>Máš super svaly</li>
+<li>Umíš být romantický když chceš</li>
+<li>Směješ se i v situaci kdy bys neměl :Dd</li>
+<li>Máš hezký růžový ručník</li>
+<li>Směješ se se mnou padajícím dětem</li>
+<li>Budeš bussinessman</li>
+<li>Chceš podepsat předmanželskou smlouvu, abych nepřišla o baráky</li>
+<li>Neměníš se kvůli nikomu</li>
+<li>...došly mi nápady asi nebudeš zas tak skvělej...</li>
+<li>Otevíráš mi dveře (gentleman)</li>
+<li>Všechno můžeme vyřešit rozhovorem</li>
+<li>Neutíkáš od problémů</li>
+<li>Pozval jsi mě na pizzu</li>
+<li>Zajímáš se o mě</li>
+<li>Máme podobné zájmy</li>
+<li>Máš dobrý vkus na hudbu (až na earrape fázi-už nikdy víc)</li>
+<li>Můžu s tebou být sama sebou</li>
+<li>Vážíš si toho, že s tebou mám trpělivost (alespoň doufám)</li>
+<li>Hezky zpíváš Karla Gotta</li>
+<li>Zajímáš se o naši budoucnost</li>
+<li>Chceš se mnou mít kočky</li>
+<li>Koukáš na TikToky, co ti posílám</li>
+<li>Máš hezké ruce</li>
+<li>Mám ráda to, jak se na mě koukáš (když už ani neposloucháš, co říkám)</li>
+<li>Nestydíš se za mě</li>
+<li>Řekl jsi o mně mamince</li>
+<li>Učíš mě trpělivosti v mezilidských vztazích</li>
+<li>Jsi weeb</li>
+<li>Chceš se mnou cestovat</li>
+<li>Máš krásné vlasy</li>
+<li>Můžu být housewife</li>
+<li>Udělal jsi mi playlist</li>
+<li>Máš pro mě cute přezdívku</li>
+<li>Jdeš na kompromisy</li>
+<li>Nevadí ti moje family trauma</li>
+<li>Jsem lepším člověkem, abych ti ukázala, že si zasloužíš být milován</li>
+<li>Ptáš se jestli jsem jedla a pila</li>
+<li>Motivuješ mě cvičit</li>
+<li>Jsi hot a cute zároveň</li>
+<li>V tvém objetí se cítím jako bych našla domov</li>
+<li>Udělal jsi mi masáž nohou :Dd</li>
+<li>jsi můj záchranný bod, když vše kolem je chaos</li>
+<li>Uneseš mě (ve smyslu, že mě zvedneš, ne že uneseš uchyláku)</li>
+<li>Dodržuješ sliby (aspoň větsinou lol)</li>
+<li>Sprchuješ se a uklízíš po sobě :Dd</li>
+<li>Protože jsis mě vybral mezi všemi ostatními</li>
+<li>Nechal jsi mě vyhrát v šachách</li>
+<li>Necháváš mě vybrat film (i když si myslím, že pak u toho spíš)</li>
+<li>Jsi originální</li>
+<li>Protože mi věříš </li>
+<li>Neumím si představit život bez tebe</li>
+<li>Sluší ti to v kuchyni</li>
+<li>Když jsem s tebou, ničeho se nebojím</li>
+<li>Nosil jsi v Ostravě moji i Kamči tašku i když jsi nemusel (mega cute)</li>
+<li>Chceš být můj muž</li>
+<li>Nejsi pro mě jen partner, jsi moje nejbližší osoba a můj nejlepší přítel</li>
+<li>Můžeme si povídat celou noc a nedojdou nám nápady</li>
+<li>Svěřila bych ti svůj život, věřím ti tak, jako nikomu</li>
+<li>Miluju jak voníš</li>
+<li>Nenechal by jsi nikoho aby mi ubližoval, nebo o mně špatně mluvil (alepsoň myslím xd)</li>
+<li>Děláš si random fotky mě a naší konverzace</li>
+<li>Už jsem psala, že jsi hot?????</li>
+<li>Umíš rychle reagovat a řešít problémy</li>
+<li>Nevzdáváš to se mnou, věříš mi, že to zvládneme</li>
+<li>Jednou jsi mi napsal fakt krásnou slohovku, doteď si ji čtu před spaním</li>
+<li>Vážíš si mně a toho co pro tebe dělám </li>
+<li>Sluší ti černá</li>
+<li>Udělala bych cokoli abych viděla jak se usmíváš</li>
+<li>Zajímáš se seberozvoj</li>
+<li>Půjdeš se mnou na jógu</li>
+<li>Akceptuješ moje odlišnosti</li>
+<li>Jsi zodpovědný</li>
+<li>Máš nejsladší rty</li>
+<li>Můžu být passanger princess</li>
+<li>Víš, že jsme ty a já proti problému, ne ty a já proti sobě</li>
+<li>Říkáš mi, že mě miluješ</li>
+<li>Nezkoušíš mě změnit, ale měníš se spolu se mnou </li>
+<li>Miluju, když mluvíš o věcech, co tě zajímají, to jak jsi u toho nadšený</li>
+<li>Tvoje dobré ráno mi dává sílu na nadcházející den</li>
+<li>Nesoudíš mě za to, jak vypadám</li>
+<li>Přiznáváš si chyby</li>
+<li>Protože jen být s tebou v naprostém tichu je pro mě krásnější než být s kýmkoli jiným</li>
+<li>Spíš se mnou na hovorech</li>
+<li>Chrápeš roztomile</li>
+<li>Ne, kecám, nechrápeš :Dd</li>
+<li>Protože se mě snažíš pochopit, nasloucháš</li>
+<li>Vážíš si mého názoru</li>
+<li>Jsi spontánní</li>
+<li>Rozumíme si i beze slov</li>
+<li>Doplňujeme se</li>
+<li>Nevybíjíš si na mě zlost, nekříčíš na mě a nenadáváš mi</li>
+<li>To, jak mě hladíš po vlasech</li>
+<li>S tebou věřím, že nic není nemožné</li>
+</ul>
+<p align="center">Víš, že nedokážu slovy popsat, jak moc mi na tobě záleží, ale věřím, že to vidíš...<br><br>Byla bych tady věčnost, kdybych měla vyjmenovat každou věc co na tobě miluji, ale protože věčnost nemáme, <br><br> jediné co ti k tomu ještě řeknu bude to, že věřím, že společně najdeme ještě víc důvodů proč se milovat. <br><br> Doufám, že jsem ti tímto ukázala, jak moc mi na tobě záleží.<br><br>Ještě jednou všechno nejlepší!</p>
+
+<!--ol>
+<li>duvod 1</li>
+<li>duvod 2</li>
+</ol--->
+	</body>
+</html>
